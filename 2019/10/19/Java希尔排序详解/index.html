@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="https://img.fungnotl.cn/basket.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fung Li">
+  <meta name="keywords" content="">
+  <title>Java希尔排序详解 - fungnotl‘s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>fungnotl‘s blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/death.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  Saturday, October 19th 2019, 4:22 pm
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.1k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      5 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p>刚接触希尔排序的时候,我是懵的,因为在学校根本没有学过希尔排序啊!</p>
+<p>查询资料:希尔排序是插入排序的升级版;</p>
+<p>从维基百科截取的Java实现希尔排序的代码</p>
+<pre><code class="java">public static void shellSort(int[] arr) {
+        int length = arr.length;
+        int temp;
+        for (int step = length / 2; step &gt;= 1; step /= 2) {
+            for (int i = step; i &lt; length; i++) {
+                temp = arr[i];
+                int j = i - step;
+                while (j &gt;= 0 &amp;&amp; arr[j] &gt; temp) {
+                    arr[j + step] = arr[j];
+                    j -= step;
+                }
+                arr[j + step] = temp;
+            }
+        }
+    }</code></pre>
+<p>我们来简单的试一下:</p>
+<pre><code class="java">public class ShellSortFromWiki{
+  public static void main(String[] args){
+    int[] a = {4, 9, 11, 3, 8, 6, 2, 7, 13, 1, 12, 5, 10};
+    shellSort(a);
+    print(a);
+  }
+  public static void shellSort(int[] arr) {
+        int length = arr.length;    //获取数组的长度
+        int temp;                   //临时变量temp
+        // step是每个区域的数值的个数,当每个区域排序到不能再继续往下排的时候;
+        // 将区域再次变小,这里是 step /= 2,将每个区域再分一半
+        for (int step = length / 2; step &gt;= 1; step /= 2) {
+            for (int i = step; i &lt; length; i++) {
+                temp = arr[i];
+                int j = i - step;
+                while (j &gt;= 0 &amp;&amp; arr[j] &gt; temp) {
+                    arr[j + step] = arr[j];
+                    j -= step;
+                }
+                arr[j + step] = temp;
+            }
+        }
+    }
+
+    static void print(int[] a){
+      for (int i = 0; i &lt; a.length; i++) {
+        System.out.print(a[i] + &quot; &quot;);
+      }
+    }
+}</code></pre>
+<p>打印:</p>
+<p>对以上代码稍加修改,打印出每一次排序的过程</p>
+<pre><code class="java">2 9 11 3 8 6 4 7 13 1 12 5 10
+2 7 11 3 8 6 4 9 13 1 12 5 10
+2 7 11 3 8 6 4 9 13 1 12 5 10
+2 7 11 1 8 6 4 9 13 3 12 5 10
+2 7 11 1 8 6 4 9 13 3 12 5 10
+2 7 11 1 8 5 4 9 13 3 12 6 10
+2 7 11 1 8 5 4 9 13 3 12 6 10
+1 7 11 2 8 5 4 9 13 3 12 6 10
+1 7 11 2 8 5 4 9 13 3 12 6 10
+1 7 5 2 8 11 4 9 13 3 12 6 10
+1 7 5 2 8 11 4 9 13 3 12 6 10
+1 7 5 2 8 11 4 9 13 3 12 6 10
+1 7 5 2 8 11 4 9 13 3 12 6 10
+1 7 5 2 8 11 3 9 13 4 12 6 10
+1 7 5 2 8 11 3 9 13 4 12 6 10
+1 7 5 2 8 6 3 9 11 4 12 13 10
+1 7 5 2 8 6 3 9 11 4 12 13 10
+1 7 5 2 8 6 3 9 11 4 12 13 10
+1 5 7 2 8 6 3 9 11 4 12 13 10
+1 2 5 7 8 6 3 9 11 4 12 13 10
+1 2 5 7 8 6 3 9 11 4 12 13 10
+1 2 5 6 7 8 3 9 11 4 12 13 10
+1 2 3 5 6 7 8 9 11 4 12 13 10
+1 2 3 5 6 7 8 9 11 4 12 13 10
+1 2 3 5 6 7 8 9 11 4 12 13 10
+1 2 3 4 5 6 7 8 9 11 12 13 10
+1 2 3 4 5 6 7 8 9 11 12 13 10
+1 2 3 4 5 6 7 8 9 11 12 13 10
+1 2 3 4 5 6 7 8 9 10 11 12 13
+1 2 3 4 5 6 7 8 9 10 11 12 13</code></pre>
+<p>总共30行数据,减去最后一行打印,总共29条;</p>
+<h3 id="排序方式"><a href="#排序方式" class="headerlink" title="排序方式:"></a>排序方式:</h3><blockquote>
+<p>希尔排序通过将比较的全部元素分为几个区域来提升插入排序的性能。这样可以让一个元素可以一次性地朝最终位置前进一大步。然后算法再取越来越小的步长进行排序，算法的最后一步就是普通的插入排序，但是到了这步，需排序的数据几乎是已排好的了（此时插入排序较快）.</p>
+</blockquote>
+<blockquote>
+<p>注意:如果你看这些文字实在是看不懂,建议拿出纸笔,一步一步算(小编比较愚钝,就是这么做的);</p>
+</blockquote>
+<blockquote>
+<p>这里维基百科提供的代码是根据数组的长度除以2[for (int step = length / 2; step &gt;= 1; step /= 2)];</p>
+</blockquote>
+<p><strong>但这并不是最佳的解决方法</strong></p>
+<p><em>我们来比较一下相同的数组排序次数的差别:</em></p>
+<p>插入排序:38次</p>
+<p>二分希尔排序:29次</p>
+<p>knuth希尔排序:21次</p>
+<p>明显是knuth希尔排序更快,下面介绍一下knuth希尔排序算法:</p>
+<pre><code class="java">public static void sort(int[] arr) {
+        int h = 1;
+        while(h &lt;= arr.length /3 ) {
+            h = h*3 + 1;
+        }
+
+        for(int gap = h; gap &gt; 0; gap = (gap-1)/3) {
+
+            for(int i=gap; i&lt;arr.length; i++) {
+                for(int j=i; j&gt;gap-1; j-=gap) {
+                    if(arr[j] &lt; arr[j-gap]) {
+                        swap(arr, j, j-gap);
+                    }
+                }
+            }
+        }
+    }</code></pre>
+<h2 id="几种常见的Gap序列"><a href="#几种常见的Gap序列" class="headerlink" title="几种常见的Gap序列:"></a>几种常见的Gap序列:</h2><ul>
+<li>希尔原本的Gap：N/2、N/4、…1(反复除以2)</li>
+<li>Hibbard的Gap：1、3、7、…、2k-1（k表示第几个gap）</li>
+<li>Knuth的Gap: 1、4、13、…、(3k -1) / 2（k表示第几个gap） 4）Sedgewick的Gap: 1、5、19、41、109、…</li>
+</ul>
+<p>看不懂?!</p>
+<p><strong>拿出笔来算 !!</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="SOHUCS" sid='http://yoursite.com/2019/10/19/Java%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E8%AF%A6%E8%A7%A3/'></div>
+  <script type="text/javascript">
+    (function () {
+      var appid = 'cyuJqj4lJ';
+      var conf = 'prod_d36dd5bf0ed04fb1231cfa36689f754d';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+        var head = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.defer = true;
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+      } else {
+        var loadJs = function (d, a) {
+          var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+          var b = document.createElement('script');
+          b.setAttribute('type', 'text/javascript');
+          b.setAttribute('defer', 'defer');
+          b.setAttribute('src', d);
+          if (typeof a === 'function') {
+            if (window.attachEvent) {
+              b.onreadystatechange = function () {
+                var e = b.readyState;
+                if (e === 'loaded' || e === 'complete') {
+                  b.onreadystatechange = null;
+                  a();
+                }
+              };
+            } else {
+              b.onload = a;
+            }
+          }
+          c.appendChild(b);
+        };
+        loadJs('https://changyan.sohu.com/upload/changyan.js', function () {
+          window.changyan.api.config({ appid: appid, conf: conf });
+        });
+      }
+    })();
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://github.com/fungnotl" target="_blank" rel="nofollow noopener"><b>fungnotl</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://leetcode-cn.com/" target="_blank" rel="nofollow noopener"> <b>Smile</b></a>
+	  <p id="hitokoto">:D 获取中...</p>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div>
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">浙ICP备19040843号</a>
+    
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Java希尔排序详解&nbsp;",
+      ],
+      cursorChar: "☺",
+      typeSpeed: 30,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  <!--动态线条背景-->
+<script type="text/javascript"
+color="140,140,140" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+
+</body>
+</html>

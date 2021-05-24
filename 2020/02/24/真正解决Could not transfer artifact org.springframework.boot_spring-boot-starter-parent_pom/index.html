@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="https://img.fungnotl.cn/basket.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fung Li">
+  <meta name="keywords" content="">
+  <title>真正解决Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom - fungnotl‘s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>fungnotl‘s blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/death.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  Monday, February 24th 2020, 1:49 am
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    593 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      2 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <h1 id="解决新建springboot项目时包导不进来的问题"><a href="#解决新建springboot项目时包导不进来的问题" class="headerlink" title="解决新建springboot项目时包导不进来的问题"></a>解决新建springboot项目时包导不进来的问题</h1><h2 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h2><ul>
+<li><p>新建一个springboot项目</p>
+</li>
+<li><p>此时maven的setting配置文件配置的阿里云的源</p>
+</li>
+<li><p>发现很多包导不进来,于是reimport,没有效果</p>
+</li>
+<li><p>于是执行clean命令</p>
+</li>
+<li><p>报错</p>
+<blockquote>
+<p>Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:2.2.4.RELEASE from/to alimaven (<a href="https://maven.aliyun.com/repository/central" target="_blank" rel="noopener">https://maven.aliyun.com/repository/central</a>): PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</p>
+</blockquote>
+</li>
+<li><p>进入报错的网站查找springbootRELEASE2.2.4的包(<a href="https://maven.aliyun.com/repository/central" target="_blank" rel="noopener">https://maven.aliyun.com/repository/central</a>)<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9mdW5nbm90bC1pbWcub3NzLWNuLWhhbmd6aG91LmFsaXl1bmNzLmNvbS9zcHJpbmdib290X3N0YXJ0dXAvc3ByaW5nYm9vdF9SRUxFQVNFLmpwZw?x-oss-process=image/format,png" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+</li>
+<li><p>发现阿里云还没有2.2.4的包,于是将springboot的版本改成2.1.7<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9mdW5nbm90bC1pbWcub3NzLWNuLWhhbmd6aG91LmFsaXl1bmNzLmNvbS9zcHJpbmdib290X3N0YXJ0dXAvc3ByaW5nYm9vdFZlcnNpb24uanBn?x-oss-process=image/format,png" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+</li>
+<li><p>还是报错</p>
+</li>
+<li><p>查看报错信息的后半部分</p>
+<blockquote>
+<p>( sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target)<br>无法找到有效的证书</p>
+</blockquote>
+</li>
+<li><p>找到问题所在</p>
+<h2 id="解决问题-两种方法"><a href="#解决问题-两种方法" class="headerlink" title="解决问题(两种方法)"></a>解决问题(两种方法)</h2><h3 id="第一种方法-在执行maven命令时忽略证书检查"><a href="#第一种方法-在执行maven命令时忽略证书检查" class="headerlink" title="第一种方法:在执行maven命令时忽略证书检查"></a>第一种方法:在执行maven命令时忽略证书检查</h3></li>
+<li><p>在新建maven工程时,会自执行maven的各种命令</p>
+</li>
+<li><p>在此处设置忽略证书检查<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9mdW5nbm90bC1pbWcub3NzLWNuLWhhbmd6aG91LmFsaXl1bmNzLmNvbS9zcHJpbmdib290X3N0YXJ0dXAvZm9yY2VTb2x1dGlvbi5qcGc?x-oss-process=image/format,png" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+</li>
+<li><p>命令如下</p>
+<pre><code>Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true</code></pre></li>
+</ul>
+<h3 id="第二种方法-手动导入证书"><a href="#第二种方法-手动导入证书" class="headerlink" title="第二种方法:手动导入证书"></a>第二种方法:手动导入证书</h3><ul>
+<li>确保maven中setting文件中的阿里源配置正确 (注意url中协议为https!)</li>
+</ul>
+<pre><code> &lt;mirror&gt;
+    &lt;id&gt;nexus-aliyun&lt;/id&gt;
+    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+    &lt;name&gt;Nexus aliyun&lt;/name&gt;
+    &lt;url&gt;https://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;
+ &lt;/mirror&gt;</code></pre><ul>
+<li>将阿里镜像库的证书加到信任证书库里面</li>
+<li>打开上面阿里源的网址</li>
+<li><a href="https://maven.aliyun.com/nexus/content/groups/public或https://maven.aliyun.com/repository/central都是一样的" target="_blank" rel="noopener">https://maven.aliyun.com/nexus/content/groups/public或https://maven.aliyun.com/repository/central都是一样的</a></li>
+<li>通过chrome浏览器下载证书到本地<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9mdW5nbm90bC1pbWcub3NzLWNuLWhhbmd6aG91LmFsaXl1bmNzLmNvbS9zcHJpbmdib290X3N0YXJ0dXAvY2VydGlmaWNhdGUuanBn?x-oss-process=image/format,png" srcset="/img/loading.gif" alt="在这里插入图片描述"></li>
+<li>一路next,将文件命名为ali_maven,后缀默认为.cer,保存到D盘根目录</li>
+</ul>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9mdW5nbm90bC1pbWcub3NzLWNuLWhhbmd6aG91LmFsaXl1bmNzLmNvbS9zcHJpbmdib290X3N0YXJ0dXAvZG93bmxvYWQuanBn?x-oss-process=image/format,png" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<ul>
+<li>通过证书添加到java信任证书库<blockquote>
+<p>cacerts包含了很多CA证书，位置在Java的安装目录：如: C:\Program Files\Java\jre1.8.0_171\lib\security\carcerts</p>
+</blockquote>
+</li>
+<li>以管理员身份打开命令提示符(cmd)</li>
+<li>进入carcerts所在文件目录</li>
+<li>执行命令<strong>keytool -import -alias cacerts -keystore cacerts -file d:\ali_maven.cer</strong></li>
+<li>默认密钥库口令:<strong>changeit</strong></li>
+<li>是否信任此证书?[否]: <strong><em>Y</em></strong></li>
+<li>显示<strong>证书已添加到密钥库中</strong>即表示添加成功</li>
+<li>回到项目中重新clean,compile,解决</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是非常坑人的地方,没有正确的解决问题会让人十分抓狂<br>希望踩过的坑及时将它填上</p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/springboot/">springboot</a>
+                    
+                      <a class="hover-with-bg" href="/tags/maven/">maven</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="SOHUCS" sid='http://yoursite.com/2020/02/24/%E7%9C%9F%E6%AD%A3%E8%A7%A3%E5%86%B3Could%20not%20transfer%20artifact%20org.springframework.boot_spring-boot-starter-parent_pom/'></div>
+  <script type="text/javascript">
+    (function () {
+      var appid = 'cyuJqj4lJ';
+      var conf = 'prod_d36dd5bf0ed04fb1231cfa36689f754d';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+        var head = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.defer = true;
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+      } else {
+        var loadJs = function (d, a) {
+          var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+          var b = document.createElement('script');
+          b.setAttribute('type', 'text/javascript');
+          b.setAttribute('defer', 'defer');
+          b.setAttribute('src', d);
+          if (typeof a === 'function') {
+            if (window.attachEvent) {
+              b.onreadystatechange = function () {
+                var e = b.readyState;
+                if (e === 'loaded' || e === 'complete') {
+                  b.onreadystatechange = null;
+                  a();
+                }
+              };
+            } else {
+              b.onload = a;
+            }
+          }
+          c.appendChild(b);
+        };
+        loadJs('https://changyan.sohu.com/upload/changyan.js', function () {
+          window.changyan.api.config({ appid: appid, conf: conf });
+        });
+      }
+    })();
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://github.com/fungnotl" target="_blank" rel="nofollow noopener"><b>fungnotl</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://leetcode-cn.com/" target="_blank" rel="nofollow noopener"> <b>Smile</b></a>
+	  <p id="hitokoto">:D 获取中...</p>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div>
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">浙ICP备19040843号</a>
+    
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "真正解决Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom&nbsp;",
+      ],
+      cursorChar: "☺",
+      typeSpeed: 30,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  <!--动态线条背景-->
+<script type="text/javascript"
+color="140,140,140" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+
+</body>
+</html>

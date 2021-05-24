@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="https://img.fungnotl.cn/basket.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fung Li">
+  <meta name="keywords" content="">
+  <title>快速搭建个人博客 - fungnotl‘s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>fungnotl‘s blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/death.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  Monday, December 9th 2019, 8:15 pm
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    3.2k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      12 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>我一直都想拥有一个属于自己的网站,自己的博客;<br>很开心,我做到了,这里就与大家分享一下我的搭建过程;</p>
+</blockquote>
+<ul>
+<li>搭建个人博客大概有以下几个步骤:<ul>
+<li>本地环境配置:安装Node.js,Git,Hexo</li>
+<li>阿里云服配置:域名备案,添加安全组,域名解析</li>
+<li>服务器环境配置:安装Node.js,Git,Nginx,Pm2</li>
+<li>github配置webhooks</li>
+</ul>
+</li>
+</ul>
+<p>注:我的本地环境为Win10,云服务器为Centos7</p>
+<h1 id="本地环境配置"><a href="#本地环境配置" class="headerlink" title="本地环境配置"></a>本地环境配置</h1><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装<a href="https://nodejs.org/zh-cn/docs/" target="_blank" rel="noopener">Node.js</a></h3><p> node.js是一个后端的JavaScript运行环境，拥有它，就可以编写系统级或者服务器端的 Javascript 代码，交给node去解释执行。</p>
+<p> 为什么要装node？Hexo本身就是一个JS框架，里面有很多JS脚本，需要node环境去执行。</p>
+<p>这里使用的是安装nvm管理node版本的方式，所以先安装nvm,nvm是针对node产生的一个版本控制工具，使用它可以下载和切换不同版本的node.<br>npm是一种包管理工具，通过npm可以安装各种在npm上传的工具包。在安装node的时候npm会同时安装。<br>后面会需要使用npm安装如hexo等工具。</p>
+<p> 安装nvm(Node Version Manager)</p>
+<ol>
+<li><a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">下载Windows10版nvm安装版本</a><br>1.1 解压,以管理员身份运行nvm-setup.exe文件<br>1.2 安装过程一路next,但要注意安装路径名不能有中文,否则可能出现一些莫名其妙的错误.<br>1.3 配置npm和node.js的下载源<br>1.3.1 编辑nvm目录下的settings.txt文件,在最后加入如下内容<br><code>node_mirror: https://npm.taobao.org/mirrors/node/</code><br><code>npm_mirror: https://npm.taobao.org/mirrors/npm/</code><br>1.4 安装并配置npm及node.js<br>1.4.1 命令行输入命令:<br><code>nvm v</code> 检查nvm是否安装成功<br>如果出现不是内部或外部命令,检查环境变量<br>在系统变量和用户变量加入NVM_HOME(nvm安装目录)和NVM_SYMLINK(node.js安装目录)<br>安装node <code>nvm install 8.0.0</code><br>使用node <code>nvm use 8.0.0</code>（安装完成之后一定要记得use，此时才会生成nodejs文件夹）<br>检查node和npm: <code>node -v</code> <code>npm -v</code><br>安装多个node版本并切换: <code>nvm list</code> 安装最新的node.js及配套npm<code>nvm install latest</code><br>如果想要切换:<code>nvm use 想要使用的node版本</code></li>
+</ol>
+<ol start="2">
+<li><p>命令行的形式安装(推荐使用)<br>2.1 安装nvm<br> <code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | &gt;&gt; bash</code><br> 安装完之后,重新执行全局变量文件<code>source ~/.bash_profile</code><br> 输入 <code>nvm</code> 能够显示nvm版本或者收到Node Version Manager信息即为安装成功<br> 如果提示找不到nvm命令或者没有.bash_profile文件，可以手动添加环境变量<br> <code>vi ~/.bash_profile</code><br> 把这段内容加到文件中<br> <code>export NVM_DIR=&quot;$HOME/.nvm&quot;</code><br> <code>[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;</code><br> 再次执行<code>source ~/.bash_profile</code><br> 2.2 通过nvm安装node.js<br> 在安装完毕nvm并配置好环境变量后，就可以通过nvm控制node版本<br> 查看node版本<code>nvm list-remote</code><br> 选择任意版本安装 <code>nvm install v8.11.4</code><br> 查看已经安装的node版本 <code>node list</code><br> 切换想要使用的版本<code>nvm use v8.11.4</code><br> 将此版本设置为默认版本<code>nvm alias default v8.11.4</code><br>验证是否安装成功<code>node --version</code> <code>npm -v</code></p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p><a href="https://git-scm.com/download/win" target="_blank" rel="noopener">安装地址</a></p>
+<blockquote>
+<p>安装完成后<code>git -version</code>确认</p>
+</blockquote>
+<p><a href="https://help.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh" target="_blank" rel="noopener">git ssh配置</a><br>ssh的配置目的是为了之后部署好代码，上传时不需要每次都输入用户名密码</p>
+<p>第一次配置需要你的github用户名和邮箱地址</p>
+<blockquote>
+<p> git config –global user.name “xxxxxx” # 自行替换<br>git config –global user.email “<a href="mailto:xxxxxx@xx.com" target="_blank" rel="noopener">xxxxxx@xx.com</a>“ # 自行替换</p>
+</blockquote>
+<p>执行生成秘钥命令</p>
+<blockquote>
+<p><code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot; # 你的 GitHub邮箱地址</code></p>
+</blockquote>
+<p>一路Enterd,看到这个就OK了</p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20191209102632616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_10,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<p>  此时~/.ssh文件夹下就会生成id_rsa（私有秘钥）和id_rsa.pub（公有密钥），将公钥复制带粘贴板</p>
+<blockquote>
+<p><code>pbcopy &lt; ~/.ssh/id_rsa.pub</code></p>
+</blockquote>
+<p>进入github,settings</p>
+<p><img src="https://img-blog.csdnimg.cn/20191209114839857.png" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<p>左侧框选择SSH and GPG keys<br><img src="https://img-blog.csdnimg.cn/20191209103640451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>new SSH key,Title随意取,将刚刚粘贴的秘钥放入Key中</p>
+<p><img src="https://img-blog.csdnimg.cn/20191209103709903.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>完成后,进入命令行,测试配置是否成功<br><code>ssh -T git@github.com</code></p>
+<blockquote>
+<p>The authenticity of host ‘github.com (207.97.227.239)’ can’t be established.<br>RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.<br>Are you sure you want to continue connecting (yes/no)?</p>
+</blockquote>
+<p>YES<br>Hi xxxxxx! You’ve successfully authenticated, but GitHub does not provide bash access.</p>
+<p>完成配置</p>
+</blockquote>
+<h3 id="新建一个github仓库"><a href="#新建一个github仓库" class="headerlink" title="新建一个github仓库"></a>新建一个github仓库</h3><p>打开github,找到仓库,新建仓库<br> Repository name(仓库名)随便写<br> Description(描述)可写可不写<br>选择public<br>直接Create  repository(创建)</p>
+<p><img src="https://img-blog.csdnimg.cn/20191209115338168.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<p>此处为SSH地址,待会发布hexo时需要<br><img src="https://img-blog.csdnimg.cn/20191209115730671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h3 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">Hexo</a>安装</h3><p> Hexo是一个博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章生成静态网页,并且有方便的发布系统和各种插件。这里主要是安装hexo-cli及如何生成博客的基本模版，确保安装Hexo时已经安装node和git.</p>
+<h3 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h3><p> 使用npm全局安装hexo-cli</p>
+<blockquote>
+<p><code>sudo npm install -g hexo-cli</code></p>
+</blockquote>
+<p> 验证安装</p>
+<blockquote>
+<p> <code>hexo -v</code></p>
+</blockquote>
+<h3 id="使用Hexo"><a href="#使用Hexo" class="headerlink" title="使用Hexo"></a>使用Hexo</h3><p> 在本地新建一个文件夹(就取个名吧,Blog),当成hexo的代码库<br> 进入文件夹,初始化hexo库,在当前文件夹生成网站所需要的文件</p>
+<blockquote>
+<p><code>hexo -init</code></p>
+</blockquote>
+<p> 安装代码仓库所需要的依赖包</p>
+<blockquote>
+<p><code>npm install</code></p>
+</blockquote>
+<p> 执行命令本地预览页面效果</p>
+<blockquote>
+<p><code>hexo generate #也可简写为hexo g</code><br><code>hexo server  #简写为hexo s</code></p>
+</blockquote>
+<p>打开浏览器,输入<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 打开页面,可以看到一个hexo的模板效果</p>
+<p><img src="https://img-blog.csdnimg.cn/20191209140131277.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<p>回到命令行,Ctrl+C中断本地服务器,继续操作</p>
+<blockquote>
+<p><code>hexo new post &quot;first blog&quot; # 注意标题中有空格需要用双引号包起来</code></p>
+</blockquote>
+<p>这时候会在source/_post文件夹(存放博客文件)中自动创建了一个first-blog.md文件</p>
+<p>再次用hexo启动本地服务器</p>
+<blockquote>
+<p><code>hexo s</code></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20191209142550714.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<p>通过对source/_post文件夹中的文件进行修改就能更改博客内容</p>
+<h3 id="配置hexo的发布"><a href="#配置hexo的发布" class="headerlink" title="配置hexo的发布"></a>配置hexo的发布</h3><p>每一次 hexo g 生成代码后,我们需要把它同步到git上,再通过github的webhooks自动同步到服务器</p>
+<p> 安装hexo的git部署插件</p>
+<blockquote>
+<p><code>npm install hexo-deployer-git --save</code></p>
+</blockquote>
+<p>打开项目下的_config.yml文件，该文件是整个站点的配置文件，在文件的最下方，修改deploy配置，这里需要用的之前生成的ssh地址</p>
+<blockquote>
+<p>deploy:<br>type: git<br>repo: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:your_name/blog-web.git # 替换为刚才新建git代码库的ssh链接<br>branch: master</p>
+</blockquote>
+<p>配置好之后,执行命令,更新代码到github</p>
+<blockquote>
+<p>hexo clean &amp;&amp; hexo g # 清楚本来的打包代码并生成出新的</p>
+<p>hexo d # hexo deploy的简写命令`</p>
+</blockquote>
+<h1 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h1><h3 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h3><p>如果你是小白,一点都不懂云服务器,看下面的链接:</p>
+<blockquote>
+<p>1.<a href="https://help.aliyun.com/document_detail/25422.html?spm=a2c4g.11186623.6.577.2ac41bd9u8CyI8" target="_blank" rel="noopener">云服务器ECS入门</a>    </p>
+<p>2.<a href="https://help.aliyun.com/document_detail/25387.html?spm=a2c4g.11186623.6.833.5ce12677fy0zHK" target="_blank" rel="noopener">安全组</a></p>
+<p>3.<a href="https://help.aliyun.com/product/35473.html?spm=a2c4g.750001.list.87.79717b13JIGLJF" target="_blank" rel="noopener">域名</a></p>
+</blockquote>
+<p>如果以下的操作还有不懂的建议百度一下,这里便不再赘余.</p>
+<p>首先推荐两个实用的Linux远程工具Xshell6,Xftp6</p>
+<p>献上破解版</p>
+<blockquote>
+<p>链接：<a href="https://pan.baidu.com/s/11O0o3Hnu26tgiAs1ZQBe6Q" target="_blank" rel="noopener">https://pan.baidu.com/s/11O0o3Hnu26tgiAs1ZQBe6Q</a><br>提取码：6i44<br>复制这段内容后打开百度网盘手机App，操作更方便哦</p>
+</blockquote>
+<h3 id="Xshell使用方法"><a href="#Xshell使用方法" class="headerlink" title="Xshell使用方法"></a>Xshell使用方法</h3><p>名称随便定,协议SSH,主机就是你的阿里云服务器的公网ip,端口号22</p>
+<p><img src="https://img-blog.csdnimg.cn/20191209152848517.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<p>用户名root,密码就是你的云服务器实例的实例密码</p>
+<p><img src="https://img-blog.csdnimg.cn/2019120915303111.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<p>这样就能连接上你的云服务器</p>
+<p><img src="https://img-blog.csdnimg.cn/20191209153502530.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h3 id="配置安全组"><a href="#配置安全组" class="headerlink" title="配置安全组"></a>配置安全组</h3><p>到云服务控制中心-&gt;网络与安全-&gt;安全组-&gt;配置规则<br><img src="https://img-blog.csdnimg.cn/20191209160027917.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>如果从来没有配置过的可以选择快速创建规则<br><img src="https://img-blog.csdnimg.cn/20191209160423610.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>加入两个必要的安全组:80/80,443/443,授权对象皆为0.0.0.0/0.<br>还需要添加一个webhooks的端口,随意取一个,就7777吧,配置规则和80/80一样;<br>也就是要添加三个安全组:80/80,443/443,7777/7777,<br><img src="https://img-blog.csdnimg.cn/20191209160703752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h3 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h3><p>域名记得备案<br>域名控制台-&gt;域名列表-&gt;解析</p>
+<p><img src="https://img-blog.csdnimg.cn/20191209161529766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<p>添加记录-&gt;</p>
+<p><img src="https://img-blog.csdnimg.cn/20191209161653523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>域名解析后,可以通过域名登录你的网站,而不是公网IP.</p>
+<h3 id="安装Node-js-1"><a href="#安装Node-js-1" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>进入云服务器<br>安装方法和本地环境配置一样,使用命令行方式<br>通过目录跳转到上面的教程</p>
+<h3 id="安装Git-1"><a href="#安装Git-1" class="headerlink" title="安装Git"></a>安装Git</h3><p>安装命令</p>
+<blockquote>
+<p><code>sudo yum install git</code></p>
+</blockquote>
+<p> 查看版本确认安装成功</p>
+<blockquote>
+<p><code>git --version</code></p>
+</blockquote>
+<p>ssh配置</p>
+<blockquote>
+<p><code>git config --global user.name &quot;xxxxxx&quot; # 自行替换</code><br><code>git config --global user.email &quot;xxxxxx@xx.com&quot; # 自行替换</code></p>
+</blockquote>
+<p>执行生成命令秘钥</p>
+<blockquote>
+<p><code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot; # 替需要换为你的 GitHub 电子邮件地址</code></p>
+</blockquote>
+<p>一路Enter到成功</p>
+<p>此时~/.ssh文件夹下就会生成id_rsa（私有秘钥）和id_rsa.pub（公有密钥），将公钥复制带粘贴板</p>
+<blockquote>
+<p><code>cd ~/.ssh</code><br><code>cat id_rsa.pub</code></p>
+</blockquote>
+<p>登录github网站-&gt;头像settings-&gt;SSH and GPG keys-&gt;New SSH key-&gt;将粘贴板上的秘钥粘贴上一个新的key(注意区分本地和服务器的SSH key)</p>
+<p>进入服务器端,将github上的代码放入服务器,输入命令行</p>
+<blockquote>
+<p><code>cd /</code><br><code>mkdir www # 用于存放业务代码</code><br><code>cd www</code><br><code>mkdir myBlog # 用于存放前端代码</code><br><code>cd myBlog</code><br><code>git clone git@github.com:yourname/blog-web.git # 自行替换为用于存放博客代码的仓库ssh地址</code></p>
+</blockquote>
+<p>现在，我们完成了git的安装及代码库的部署，但是现在代码只是暂时同步了当前仓库的最新内容，但是如果有人在本地推送新的代码上去，服务端需要重新拉取代码</p>
+<blockquote>
+<p><code>git pull # git代码拉取命令</code></p>
+</blockquote>
+<h3 id="安装及配置Nginx"><a href="#安装及配置Nginx" class="headerlink" title="安装及配置Nginx"></a>安装及配置Nginx</h3><p><a href="http://www.nginx.cn/nginxchswhyuseit" target="_blank" rel="noopener">何为nginx?</a><br>这里使用Nginx就是为了配置反向代理，实现页面访问。</p>
+<p>安装CentOS 7 EPEL存储库，EPEL存储库相当于为系统安装一个第三方包源，其中会有一些常用的工具包</p>
+<blockquote>
+<p> <code>sudo yum install epel-release</code></p>
+</blockquote>
+<p>安装nginx</p>
+<blockquote>
+<p><code>sudo yum install nginx</code></p>
+</blockquote>
+<p> YES至安装成功</p>
+<p>启动Nginx</p>
+<blockquote>
+<p><code>sudo systemctl start nginx</code></p>
+</blockquote>
+<p>设置系统自启nginx</p>
+<blockquote>
+<p><code>sudo systemctl enable nginx</code></p>
+</blockquote>
+<ul>
+<li>配置nginx,让你的域名直接访问到服务器博客代码,显示博客页面<ul>
+<li>找到nginx配置文件,默认在 /etc/nginx/nginx.conf</li>
+</ul>
+</li>
+<li>开始修改配置文件<blockquote>
+<p><code>vi /etc/nginx/nginx.conf # nginx的配置文件路径</code></p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><code>server {</code><br>       <code>listen       80;</code><br>        <code>server_name  www.baidu.com; # 购买的域名</code><br>      <code>root /www/myBlog/blog-web; # 在服务端的代码路径</code><br>      <code>include /etc/nginx/default.d/*.conf;</code><br>       <code>location / {</code><br>          <code>root /www/myBlog/blog-web;</code><br>          <code>index index.jsp index.html index.htm;</code><br>       <code>}</code><br>   <code>}</code></p>
+</blockquote>
+<p>不会用vim编辑器?<br><a href="https://blog.csdn.net/FungLi_notLove/article/details/81489968" target="_blank" rel="noopener">vim基本用法</a></p>
+<p>重启Nginx</p>
+<blockquote>
+<p><code>systemctl restart nginx</code></p>
+</blockquote>
+<p>完成这些配置后,打开浏览器,输入你的域名,就能浏览你的博客页面了</p>
+<h3 id="安装pm2"><a href="#安装pm2" class="headerlink" title="安装pm2"></a>安装pm2</h3><p><a href="https://pm2.keymetrics.io/docs/usage/quick-start/" target="_blank" rel="noopener">pm2</a>是node的守护进程管理器,安装pm2可以在使用webhooks时创建的服务进行维护<br>安装</p>
+<blockquote>
+<p><code>npm install -g pm2 # npm 在装node时已经自动安装</code><br><code>pm2 -v # 查看pm2版本</code></p>
+</blockquote>
+<p>pm2常用命令</p>
+<blockquote>
+<p>pm2 start <path> # 执行对应路径脚本<br>pm2 list # 查看看起的进程列表<br>pm2 restart &lt;name|id&gt; # 重启对应进程<br>pm2 delete &lt;name|id|’all’&gt; # 删除对应的进程 all是全部<br>pm2 logs # 查看进程打印日志<br>pm2 monit # 监控每个 node 进程的 cpu 和内存使用情况</p>
+</blockquote>
+<h1 id="配置仓库webhooks"><a href="#配置仓库webhooks" class="headerlink" title="配置仓库webhooks"></a>配置仓库webhooks</h1><p><a href="https://developer.github.com/webhooks/" target="_blank" rel="noopener">git webhooks</a>能够实时的将变化的代码提交到服务器</p>
+<p> 打开GitHub仓库-&gt;Settings<br><img src="https://img-blog.csdnimg.cn/20191209183652858.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>Webhooks-&gt;右上角add webhook<br><img src="https://img-blog.csdnimg.cn/2019120918372378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>URL:http://你的公网ip:7777/<br>Content type: application/json<br>Secret:自己的webhook密码(后面要用到)<br>选择Just the push event.<br>Add webhook<br><img src="https://img-blog.csdnimg.cn/20191209184626962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<h3 id="服务器端口设置监听"><a href="#服务器端口设置监听" class="headerlink" title="服务器端口设置监听"></a>服务器端口设置监听</h3><p>登录服务器<br>创建一个文件夹放置监听服务文件<br><code>cd ~</code><br><code>mkdir ListenWebhooks</code><br><code>vi webhook.js # 写入服务</code><br>将以下代码放入webhook.js文件</p>
+<blockquote>
+<p>const secret = “刚刚设置webhook时的secret密码”;<br>const repo = “/www/myBlog/blog-web”;<br>const http = require(“http”);<br>const crypto = require(“crypto”);<br>const exec = require(‘child_process’).exec;<br>http.createServer(function (req, res) {<br>    req.on(‘data’, function(chunk) {<br>        let sig = “sha1=” + crypto.createHmac(‘sha1’, secret).update(chunk.toString()).digest(‘hex’);<br>        if (req.headers[‘x-hub-signature’] == sig) {<br>          exec(‘cd ‘ + repo + ‘ &amp;&amp; git pull’);<br>        } else {<br>            console.log(‘err:’, ‘signature’, req.headers[‘x-hub-signature’], ‘sig’, sig, ‘time:’, new Date());<br>        });<br>        }<br>    res.end();<br>}).listen(7777);</p>
+</blockquote>
+<p>使用pm2开启服务<br><code>pm2 start ./webhook.js</code><br><code>pm2 list # 查看开启的进程列表</code><br><img src="https://img-blog.csdnimg.cn/20191209192557876.png" srcset="/img/loading.gif" alt="pm2 list"><br>测试webhook<br>进入github,编辑webhook,Redeliver,成功!<br><img src="https://img-blog.csdnimg.cn/20191209192805735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Z1bmdMaV9ub3RMb3Zl,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>所有配置全部完成.</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>一般如果测试webhook成功了,所有步骤也就成功了.</p>
+<ul>
+<li>为了测试效果,可以在本地代码库的source/_post文件夹中随便加入一个md文件</li>
+<li>接下来进入代码库文件夹,当前文件夹启动命令行(右键 git bash here也可以)</li>
+<li>输入命令<code>hexo clean &amp;&amp; hexo g</code></li>
+<li>再输入命令<code>hexo d</code></li>
+<li>浏览器输入域名,博客出现md文件的内容的文章即为设置成功</li>
+</ul>
+<h3 id="最后-为了使我们的博客变得更加好看-我们可以登录hexo寻找适合自己的主题并设置"><a href="#最后-为了使我们的博客变得更加好看-我们可以登录hexo寻找适合自己的主题并设置" class="headerlink" title="最后,为了使我们的博客变得更加好看,我们可以登录hexo寻找适合自己的主题并设置!"></a>最后,为了使我们的博客变得更加好看,我们可以登录<a href="https://hexo.io/themes/" target="_blank" rel="noopener">hexo</a>寻找适合自己的主题并设置!</h3><p>有任何问题可以联系我或者评论</p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/">阿里云</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9F%9F%E5%90%8D/">域名</a>
+                    
+                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Git/">Git</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="SOHUCS" sid='http://yoursite.com/2019/12/09/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/'></div>
+  <script type="text/javascript">
+    (function () {
+      var appid = 'cyuJqj4lJ';
+      var conf = 'prod_d36dd5bf0ed04fb1231cfa36689f754d';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+        var head = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.defer = true;
+        script.id = 'changyan_mobile_js';
+        script.src = 'https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
+        head.appendChild(script);
+      } else {
+        var loadJs = function (d, a) {
+          var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+          var b = document.createElement('script');
+          b.setAttribute('type', 'text/javascript');
+          b.setAttribute('defer', 'defer');
+          b.setAttribute('src', d);
+          if (typeof a === 'function') {
+            if (window.attachEvent) {
+              b.onreadystatechange = function () {
+                var e = b.readyState;
+                if (e === 'loaded' || e === 'complete') {
+                  b.onreadystatechange = null;
+                  a();
+                }
+              };
+            } else {
+              b.onload = a;
+            }
+          }
+          c.appendChild(b);
+        };
+        loadJs('https://changyan.sohu.com/upload/changyan.js', function () {
+          window.changyan.api.config({ appid: appid, conf: conf });
+        });
+      }
+    })();
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://github.com/fungnotl" target="_blank" rel="nofollow noopener"><b>fungnotl</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://leetcode-cn.com/" target="_blank" rel="nofollow noopener"> <b>Smile</b></a>
+	  <p id="hitokoto">:D 获取中...</p>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div>
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">浙ICP备19040843号</a>
+    
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "快速搭建个人博客&nbsp;",
+      ],
+      cursorChar: "☺",
+      typeSpeed: 30,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  <!--动态线条背景-->
+<script type="text/javascript"
+color="140,140,140" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="https://img.fungnotl.cn/basket.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fung Li">
+  <meta name="keywords" content="">
+  <title>fungnotl‘s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>fungnotl‘s blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/sky_after.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fas fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5 z-depth-3" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/10/30/%E5%AF%B9JAVA%E6%B3%A8%E8%A7%A3%EF%BC%88Annotation%EF%BC%89%E7%9A%84%E7%90%86%E8%A7%A3/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/java%E6%B3%A8%E8%A7%A3/ANNOTATION.png" srcset="/img/loading.gif" alt="对JAVA注解（Annotation）的理解"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/10/30/%E5%AF%B9JAVA%E6%B3%A8%E8%A7%A3%EF%BC%88Annotation%EF%BC%89%E7%9A%84%E7%90%86%E8%A7%A3/">
+        <p class="h4 index-header">对JAVA注解（Annotation）的理解</p>
+      </a>
+
+      <a href="/2020/10/30/%E5%AF%B9JAVA%E6%B3%A8%E8%A7%A3%EF%BC%88Annotation%EF%BC%89%E7%9A%84%E7%90%86%E8%A7%A3/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Java注解(Annotation)首先得明白什么是注解？注解：解释词句的文字；（中文解释）Annotation: a comment or instruction.(英文注释)说白了就是让别人看到了就知道啥意思，只不过这里的“别人”是计算机程序而已
+定义Java 注解（Annotation）又称 Java 标注，是 JDK5.0 引入的一种注释机制。Java 语言中的类、方法、变量、参数和包等都可以被标注。和 Javadoc 不同，Java 标注可以通过反射获取标注内容。在编译器生成类文件时，标注可以被嵌入到字节码中。Java 虚拟机可以保留标注内容，在运行时可以获取到标注内容 。 当然它也</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-10-30&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Annotation%EF%BC%8C%E6%B3%A8%E8%A7%A3/">Annotation，注解</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/05/15/Oracle%2011g%20%E6%9C%8D%E5%8A%A1%E4%BB%8B%E7%BB%8D/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/Oracle%2011g%20%E4%B8%83%E5%A4%A7%E6%9C%8D%E5%8A%A1%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D/oracle-logo.png" srcset="/img/loading.gif" alt="Oracle 11g 服务介绍"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/05/15/Oracle%2011g%20%E6%9C%8D%E5%8A%A1%E4%BB%8B%E7%BB%8D/">
+        <p class="h4 index-header">Oracle 11g 服务介绍</p>
+      </a>
+
+      <a href="/2020/05/15/Oracle%2011g%20%E6%9C%8D%E5%8A%A1%E4%BB%8B%E7%BB%8D/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Oracle的七个服务安装完 Oracle 11g后会出现以下七个服务，分别是：
+
+Oracle ORCL VSS Writer Service
+OracleDBConsoleorcl
+OracleJobSchedulerORCL
+OracleMTSRecoveryService
+OracleOraDb11g_home1ClrAgent
+OracleOraDb11g_home1TNSListener
+OracleServiceORCL
+
+Oracle ORCL VSS Writer Service（Oracle卷映射拷贝写入服务）Oracle ORCL VSS Writer Service（O</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-15&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Oracle/">Oracle</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/05/10/%E7%AE%80%E5%8D%95%E8%81%8A%E8%81%8AHashMap%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/%E8%81%8A%E8%81%8AHashMap/%E5%9B%BE.png" srcset="/img/loading.gif" alt="简单聊聊HashMap和红黑树"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/05/10/%E7%AE%80%E5%8D%95%E8%81%8A%E8%81%8AHashMap%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/">
+        <p class="h4 index-header">简单聊聊HashMap和红黑树</p>
+      </a>
+
+      <a href="/2020/05/10/%E7%AE%80%E5%8D%95%E8%81%8A%E8%81%8AHashMap%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">HashMap简介HashMap在JDK1.2时加入，一步步发展到JDK1.6，此时HashMap已经趋于成熟。Java为数据结构中的映射定义了一个接口 java.util.Map，此接口主要有4个常用的实现类，分别是HashMap、HashTable、LinkedHashMap和TreeMap,类继承关系如下：
+几个类的特点
+HashMap：它根据键的hashCode值存储数据，大多数情况下可以直接定位到它的值，因而具有很快的访问速度，但遍历顺序却是不确定的。 HashMap最多只允许一条记录的键为null，允许多条记录的值为null。HashMap非线程安全，即任一时刻可以有多个线程同时写</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-10&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/HashMap%EF%BC%8C%E7%BA%A2%E9%BB%91%E6%A0%91/">HashMap，红黑树</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/04/10/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99%E4%B9%8B%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.png" srcset="/img/loading.gif" alt="设计模式六大原则之单一职责原则"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/04/10/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99%E4%B9%8B%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/">
+        <p class="h4 index-header">设计模式六大原则之单一职责原则</p>
+      </a>
+
+      <a href="/2020/04/10/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99%E4%B9%8B%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">单一职责原则(SRP (Single Responsibility Principle))单一职责原则定义：应该有且仅有一个原因引起类的变更
+
+
+很简单的一个类图，很容易可以看出问题所在，用户的属性和行为没有分开；应该用户的信息抽取成一个业务对象接口，行为抽取成一个业务逻辑接口
+
+修改后：
+
+重新拆封成两个接口，IUserBO负责用户的属性，简单地说，IUserBO的职责就是收集和反馈用户的属性信息；
+IUserBiz负责用户的行为，完成用户信息的维护和变更。
+
+回到单一职责的定义：应该有且只有一个原因引起类的变更，这里就是把一个接口分成两个接口，依赖了单一职责原则。
+单一职责的思考但是问题来</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-10&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%81%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99/">设计模式、单一职责原则</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/02/24/%E7%9C%9F%E6%AD%A3%E8%A7%A3%E5%86%B3Could%20not%20transfer%20artifact%20org.springframework.boot_spring-boot-starter-parent_pom/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/springboot_startup/springboot.jpg" srcset="/img/loading.gif" alt="真正解决Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/02/24/%E7%9C%9F%E6%AD%A3%E8%A7%A3%E5%86%B3Could%20not%20transfer%20artifact%20org.springframework.boot_spring-boot-starter-parent_pom/">
+        <p class="h4 index-header">真正解决Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom</p>
+      </a>
+
+      <a href="/2020/02/24/%E7%9C%9F%E6%AD%A3%E8%A7%A3%E5%86%B3Could%20not%20transfer%20artifact%20org.springframework.boot_spring-boot-starter-parent_pom/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">解决新建springboot项目时包导不进来的问题发现问题
+新建一个springboot项目
+
+此时maven的setting配置文件配置的阿里云的源
+
+发现很多包导不进来,于是reimport,没有效果
+
+于是执行clean命令
+
+报错
+
+Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:2.2.4.RELEASE from/to alimaven (https://maven.aliyun.com/repository/central): PKIX path buildin</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-24&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/springboot/">springboot</a>&nbsp;
+          
+            <a href="/tags/maven/">maven</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/01/27/%E6%A1%B6%E6%8E%92%E5%BA%8F%E4%B9%8B%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/%E6%A1%B6%E6%8E%92%E5%BA%8F/Kobe.jpg" srcset="/img/loading.gif" alt="桶排序之计数排序与基数排序"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/01/27/%E6%A1%B6%E6%8E%92%E5%BA%8F%E4%B9%8B%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">桶排序之计数排序与基数排序</p>
+      </a>
+
+      <a href="/2020/01/27/%E6%A1%B6%E6%8E%92%E5%BA%8F%E4%B9%8B%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">桶排序之计数排序和基数排序桶排序
+一种常见的排序算法,工作原理是将数组分到有限数量的桶子里,每个桶子再个别进行排序(会使用递归的方式继续使用桶排序进行排序或者使用其他的排序算法).
+
+计数排序计数排序是桶排序的一种特殊情况
+
+从图中可以看出,待排序数字在[1,9]范围内;
+创建9个空桶,将待排序数字分别放在对应的桶中;
+再依次将桶中的元素按照桶的顺序拿出;
+
+代码实现:
+public class CountSort {
+    public static void main(String[] args) {
+        int[] arr = {2, 4, 2, 3, 7, 1, 1, 1</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-27&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/">桶排序</a>&nbsp;
+          
+            <a href="/tags/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/">计数排序</a>&nbsp;
+          
+            <a href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">基数排序</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/01/01/ArrayList%E5%8A%A8%E6%80%81%E6%89%A9%E5%AE%B9%E6%BF%80%E8%B5%B7%E9%AA%8C%E8%AF%81(JDK12%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/ArrayList%E5%8A%A8%E6%80%81%E6%89%A9%E5%AE%B9/2020.png" srcset="/img/loading.gif" alt="ArrayList动态扩容及其验证(JDK12源码分析)"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/01/01/ArrayList%E5%8A%A8%E6%80%81%E6%89%A9%E5%AE%B9%E6%BF%80%E8%B5%B7%E9%AA%8C%E8%AF%81(JDK12%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)/">
+        <p class="h4 index-header">ArrayList动态扩容及其验证(JDK12源码分析)</p>
+      </a>
+
+      <a href="/2020/01/01/ArrayList%E5%8A%A8%E6%80%81%E6%89%A9%E5%AE%B9%E6%BF%80%E8%B5%B7%E9%AA%8C%E8%AF%81(JDK12%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">ArrayList动态扩容(JDK12)最近有在温习一下java容器,今天就开始读一下ArrayList的动态扩容
+ArrayList是什么?
+ArrayList叫做动态数组,实现了长度可变的数组, 在内存中分配连续的空间.
+
+优缺点
+
+优点:遍历元素和随机访问元素的效率较高缺点:添加和删除需要大量移动元素,效率低;按照内容查询效率低;
+
+
+ArrayList是在object包中,继承于Collection与其子类AbstractList的.
+所有实现了的接口有:Serializable(序列化), Cloneable(克隆), Iratable(迭代器),Collection(集合), Li</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-01&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/ArrayList/">ArrayList</a>&nbsp;
+          
+            <a href="/tags/%E6%BA%90%E7%A0%81/">源码</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/12/09/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/blog.jpg" srcset="/img/loading.gif" alt="快速搭建个人博客"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2019/12/09/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+        <p class="h4 index-header">快速搭建个人博客</p>
+      </a>
+
+      <a href="/2019/12/09/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">前言
+我一直都想拥有一个属于自己的网站,自己的博客;很开心,我做到了,这里就与大家分享一下我的搭建过程;
+
+
+搭建个人博客大概有以下几个步骤:
+本地环境配置:安装Node.js,Git,Hexo
+阿里云服配置:域名备案,添加安全组,域名解析
+服务器环境配置:安装Node.js,Git,Nginx,Pm2
+github配置webhooks
+
+
+
+注:我的本地环境为Win10,云服务器为Centos7
+本地环境配置安装Node.js node.js是一个后端的JavaScript运行环境，拥有它，就可以编写系统级或者服务器端的 Javascript 代码，交给node去解释执行。
+ 为什么要装no</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-09&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>&nbsp;
+          
+            <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/">阿里云</a>&nbsp;
+          
+            <a href="/tags/%E5%9F%9F%E5%90%8D/">域名</a>&nbsp;
+          
+            <a href="/tags/hexo/">hexo</a>&nbsp;
+          
+            <a href="/tags/Git/">Git</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/10/19/Java%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E8%AF%A6%E8%A7%A3/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/shellSort.jpg" srcset="/img/loading.gif" alt="Java希尔排序详解"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2019/10/19/Java%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E8%AF%A6%E8%A7%A3/">
+        <p class="h4 index-header">Java希尔排序详解</p>
+      </a>
+
+      <a href="/2019/10/19/Java%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E8%AF%A6%E8%A7%A3/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">希尔排序刚接触希尔排序的时候,我是懵的,因为在学校根本没有学过希尔排序啊!
+查询资料:希尔排序是插入排序的升级版;
+从维基百科截取的Java实现希尔排序的代码
+public static void shellSort(int[] arr) {
+        int length = arr.length;
+        int temp;
+        for (int step = length / 2; step &gt;= 1; step /= 2) {
+            for (int i = step; i &lt; length; i++) {
+           </div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-19&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/09/10/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8BVolatile%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
+          <img src="https://fungnotl-img.oss-cn-hangzhou.aliyuncs.com/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91.png" srcset="/img/loading.gif" alt="多线程与高并发之Volatile关键字"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2019/09/10/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8BVolatile%E5%85%B3%E9%94%AE%E5%AD%97/">
+        <p class="h4 index-header">多线程与高并发之Volatile关键字</p>
+      </a>
+
+      <a href="/2019/09/10/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8BVolatile%E5%85%B3%E9%94%AE%E5%AD%97/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">﻿
+多线程高并发之Volatile关键字Volatile关键字这里先介绍一下Volatile的意思，话不多说，上翻译
+Volatile     &nbsp; &nbsp;      [ˈvɒlətaɪl]          &nbsp;  &nbsp;          adj.易变的;无定性的;无常性的;可能急剧波动的;不稳定的;易恶化的;易挥发的;
+话不多说，进入主题
+
+首先，Volatile是Java语言中的一个关键字（在其它编程语言中也有，如C++、C语言都有）。
+简单地说，volatile关键字能使一个变量在多个线程间可见
+volatile的两个作用：1.保证线程的可见性    2.</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-10&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91%E3%80%81Volatile/">多线程与高并发、Volatile</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="index posts navigation">
+    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-angle-double-right"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByClassName("page-number")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://github.com/fungnotl" target="_blank" rel="nofollow noopener"><b>fungnotl</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://leetcode-cn.com/" target="_blank" rel="nofollow noopener"> <b>Smile</b></a>
+	  <p id="hitokoto">:D 获取中...</p>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div>
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">浙ICP备19040843号</a>
+    
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "STAY HUNGRY, STAY FOOLISH&nbsp;",
+      ],
+      cursorChar: "☺",
+      typeSpeed: 30,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  <!--动态线条背景-->
+<script type="text/javascript"
+color="140,140,140" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+
+</body>
+</html>
